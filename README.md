@@ -5,7 +5,15 @@
 
 ## What is this system for?
 This system puts face recognition and IP camera together, thus enabling the surveilence of your place.
-Personally, I've wondered what happens in my room when I go out.
+Personally, I've wondered what happens in my room when I go out, and that was the direct motivation of this project.
+
+## Installation
+First, you need Python 3 to run this system. I strongly recommend you to make a virtual environment for this system.
+
+
+For now, there are a number of hard coded values in codes. To run the system, you should;
+* In `watch.py` and `take_pics.py`, fix `vsrc` value. Details are explained in **Ip Camera** section.
+* In `watch.py`, fix `encodings/seungpyo.encodings` to the path where you store your face encodings. It is highly recommended to store the encodings in  `encodings/` directory.
 
 ## IP Camera
 I used dahua's IP camera, and its model name is `DH-SD29204T-GN`.
@@ -13,8 +21,9 @@ Although dahua provides a number of cool features like PTZ control or face detec
 I just read frames from the camera using OpenCV's VideoCapture().
 If you want to reproduce my results using your own IP camera, you should be careful about the issues below:
 * You should fix the `vsrc`, the video source URI by putting **your** ID and password.
-* I put camera upside down to put it on my table and used `cv2.flip()`. If you installed it upright, you should the `cv2.flip()`.
-* Dahua IP Camera has default IP address of `192.168.1.108`. Beware of subnet mask settings so that your PC can access IP camera.
+* If you are just using a webcam on your laptop or a USB webcam, just set `vsrc` to `0`. 
+* I put camera upside down to put it on my table and used `cv2.flip()`. If you installed it upright, you should remove the `cv2.flip()`.
+* Dahua IP Camera has a default IP address of `192.168.1.108`. Beware of subnet mask settings so that your PC can access IP camera.
 
 
 ## Face Recognition
@@ -28,7 +37,7 @@ By running
 
 you can register your face to the system.
 
-Although the system compares for every photos you registered, the latency doesn't change even though you increase the number of photos.
+Although the system compares every photos you registered, the latency doesn't change even though you increase the number of photos.
 It seems like face_recognition library performs batch operation.
 
 ## `watch.py`
