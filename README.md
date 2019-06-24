@@ -10,6 +10,7 @@ Personally, I've wondered what happens in my room when I go out, and that was th
 ## Installation
 First, you need Python 3 to run this system. I strongly recommend you to make a virtual environment for this system.
 To install the dependencies, just run
+
 `$ pip install -r requirements.txt`
 
 For now, there are a number of hard coded values in codes. To run the system, you should;
