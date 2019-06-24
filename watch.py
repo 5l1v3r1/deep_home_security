@@ -24,21 +24,6 @@ with open('encodings/seungpyo.encodings', 'rb') as f:
     granted_encodings = pickle.load(f)
 
 logs_dir = 'logs'
-'''
-granted_dir = 'img/seungpyo'
-print ('Generating encodings from {}...'.format(granted_dir))
-for granted_filename in os.listdir(granted_dir):
-    granted_path = os.path.join(granted_dir, granted_filename)
-    granted_pic = face_recognition.load_image_file(granted_path)
-    h, w, _ = granted_pic.shape
-    if granted_pic is None:
-        print('load_image_file failed at {}'.foramt(granted_path))
-    cv2.imshow(granted_path, granted_pic)
-    if cv2.waitKey(0) & 0xFF == ord('q'):
-        sys.exit()
-    granted_encodings.append(
-        face_recognition.face_encodings(granted_pic, (0, w, h, 0))[0])
-'''
 print ('{} encodings were succesfully generated.'.format(len(granted_encodings)))
 
 color_granted = (0, 255, 0) # Green
@@ -66,10 +51,10 @@ while True:
       t0 = time.time()
       locs = face_recognition.face_locations(frame_small)
       t1 = time.time()
-      # new_face_encodings = face_recognition.face_encodings(frame_small)
       # Use recognized locations to avoid redundant works.
       new_face_encodings = face_recognition.face_encodings(frame_small, locs)
       t2 = time.time()
+      # Uncomment the following two lines if you want to get elapsed times of face_recognition APIs.
       # print ('face_locations: {}'.format(t1-t0))
       # print ('face_encodings: {}'.format(t2-t1))
     
@@ -86,7 +71,6 @@ while True:
         matched = [res for res in results if res]
         match_confidence = float(len(matched)) / len(results) 
         granted = match_confidence > match_threshold
-        # print ('{}% match'.format(match_confidence*100))           
         if granted:
             rect_color = color_granted
             rect_text = '{} ({}%)'.format(text_granted, match_confidence*100)

@@ -54,17 +54,7 @@ while frame_num < max_frame_num:
         print ('Failed to detect a face in the photo; trying again...')
         continue
     small_frames.append(frame_small)
-    '''
-    loc = locs[0]
-    t, r, b, l = loc
-    face_blob = frame_small[t:b, l:r]
-    img_path = os.path.join(img_dir, '{}.jpg'.format(frame_num))
-    cv2.imwrite(img_path, face_blob)
-
-    cv2.imshow('photo #{}'.format(frame_num), face_blob)
-    cv2.waitKey(1000)
-    cv2.destroyAllWindows()
-    '''
+    
     frame_num += 1
     print('Took photo #{}'.format(frame_num))
 
